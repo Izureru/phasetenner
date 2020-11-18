@@ -1,3 +1,4 @@
+import io from 'socket.io-client';
 import Card from '../helpers/card';
 import Zone from '../helpers/zone';
 
@@ -16,8 +17,20 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
+        this.isPlayerA = false;
+        this.opponentCards = [];
+
         this.dealText = this.add.text(75, 350, ['DEAL CARDS']).setFontSize(18).setFontFamily('Trebuchet MS').setColor('#00ffff').setInteractive();
         let self = this;
+
+        let socket = io('http://localhost:3000', { transports: ["websocket"]});
+        socket.on('connect', () => {console.log("connected")});
+        socket.on('connect_error', (e) => {console.log("connect error: ", e)});
+        socket.on('connect_timeout', (e) => {console.log("connect timeout: ", e)});
+
+        this.socket.on('isPlayerA', function () {
+            self.isPlayerA = true;
+        })
 
         this.dealCards = () => {
             for (let i = 0; i < 5; i++) {
