@@ -11,10 +11,9 @@ export default class Game extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('cyanCardFront', 'src/assets/CyanCardFront.png');
-        this.load.image('cyanCardBack', 'src/assets/CyanCardBack.png');
-        this.load.image('magentaCardFront', 'src/assets/MagentaCardFront.png');
-        this.load.image('magentaCardBack', 'src/assets/MagentaCardBack.png');
+        this.load.image('7G', 'src/assets/7G.png');
+        this.load.image('cardback', 'src/assets/cardback.png');
+        this.load.image('8B', 'src/assets/8B.png');
     }
 
     create() {
@@ -23,7 +22,9 @@ export default class Game extends Phaser.Scene {
 
         this.zone = new Zone(this);
         this.dropZone = this.zone.renderZone();
+        this.deckZone = this.zone.renderDeckZone();
         this.outline = this.zone.renderOutline(this.dropZone);
+        this.deckOutline = this.zone.renderOutline(this.deckZone);
 
         this.dealer = new Dealer(this);
 
@@ -50,11 +51,11 @@ export default class Game extends Phaser.Scene {
                 self.opponentCards.shift().destroy();
                 self.dropZone.data.values.cards++;
                 let card = new Card(self);
-                card.render(((self.dropZone.x - 350) + (self.dropZone.data.values.cards * 50)), (self.dropZone.y), sprite).disableInteractive();
+                card.render((self.dropZone), (self.dropZone.y), sprite).disableInteractive();
             }
         })
 
-        this.dealText = this.add.text(75, 350, ['DEAL CARDS']).setFontSize(18).setFontFamily('Trebuchet MS').setColor('#00ffff').setInteractive();
+        this.dealText = this.add.text(600, 350, ['DEAL CARDS']).setFontSize(18).setFontFamily('Trebuchet MS').setColor('#00ffff').setInteractive();
 
         this.dealText.on('pointerdown', function () {
             self.socket.emit("dealCards");
@@ -88,7 +89,7 @@ export default class Game extends Phaser.Scene {
 
         this.input.on('drop', function (pointer, gameObject, dropZone) {
             dropZone.data.values.cards++;
-            gameObject.x = (dropZone.x - 350) + (dropZone.data.values.cards * 50);
+            gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
             gameObject.disableInteractive();
             self.socket.emit('cardPlayed', gameObject, self.isPlayerA);
