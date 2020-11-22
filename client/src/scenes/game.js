@@ -11,9 +11,32 @@ export default class Game extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('7G', 'src/assets/7G.png');
+        this.load.image('1Ba', 'src/assets/1Ba.png');
+        this.load.image('1Ya', 'src/assets/1Ya.png');
+        this.load.image('1Ga', 'src/assets/1Ga.png');
+        this.load.image('1Ra', 'src/assets/1Ra.png');
+        this.load.image('1Bb', 'src/assets/1Bb.png');
+        this.load.image('1Yb', 'src/assets/1Yb.png');
+        this.load.image('1Gb', 'src/assets/1Gb.png');
+        this.load.image('1Rb', 'src/assets/1Rb.png');
+        this.load.image('2Ba', 'src/assets/2Ba.png');
+        this.load.image('2Ya', 'src/assets/2Ya.png');
+        this.load.image('2Ga', 'src/assets/2Ga.png');
+        this.load.image('2Ra', 'src/assets/2Ra.png');
+        this.load.image('2Bb', 'src/assets/2Bb.png');
+        this.load.image('2Yb', 'src/assets/2Yb.png');
+        this.load.image('2Gb', 'src/assets/2Gb.png');
+        this.load.image('2Rb', 'src/assets/2Rb.png');
+        this.load.image('3Ba', 'src/assets/3Ba.png');
+        this.load.image('3Ya', 'src/assets/3Ya.png');
+        this.load.image('3Ga', 'src/assets/3Ga.png');
+        this.load.image('3Ra', 'src/assets/3Ra.png');
+        this.load.image('3Bb', 'src/assets/3Bb.png');
+        this.load.image('3Yb', 'src/assets/3Yb.png');
+        this.load.image('3Gb', 'src/assets/3Gb.png');
+        this.load.image('3Rb', 'src/assets/3Rb.png');
         this.load.image('cardback', 'src/assets/cardback.png');
-        this.load.image('8B', 'src/assets/8B.png');
+        
     }
 
     create() {
